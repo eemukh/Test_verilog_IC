@@ -21,7 +21,6 @@ module tt_um_eemukh_ControlBlock (
   //assign uio_out = 0;
   assign uio_oe[3:0] = 0;
   assign uio_oe[7:4] = 1;
-  // wire [6:0] Mainout:
 
   //Inputs
   wire [5:0] OPcode; // Input 6 OPCode instruction bits
@@ -68,7 +67,7 @@ module tt_um_eemukh_ControlBlock (
   assign uo_out[7] = 0;
 
   assign F3_0[3:0] = uio_in[3:0];
-  
+
   assign uio_in[7:4] = 0;
 
 
@@ -77,17 +76,6 @@ module tt_um_eemukh_ControlBlock (
   assign uio_out[2] = Op2;
   assign uio_out[3] = Op3;
   assign uio_out[7:4] = 0;
-
-  //Assign everything to zero as default
-  // assign RegDst = 0; 
-  // assign ALUSrc = 0;
-  // assign MemtoReg = 0;
-  // assign RegWrite = 0;
-  // assign MemRead = 0;
-  // assign MemWrite = 0;
-  // assign Branch = 0;
-  // assign ALUOp[0] = 0;
-  // assign ALUOp[1] = 0; 
 
   //Main Control Unit
 
@@ -107,9 +95,10 @@ module tt_um_eemukh_ControlBlock (
   assign ALUOp[0] = Out4;
   assign ALUOp[1] = Out1; 
 
+  assign F5_4[1] = 1;
+  assign F5_4[0] = 0;
+
   //ALU Control Unit
-  // assign F5_4[1] = 1;
-  // assign F5_4[0] = 0;
 //______________________________________________
   assign Op3 = ALUOp[0] & ~ALUOp[0];
   assign Op2 = ALUOp[0] | (ALUOp[1] & F3_0[1]);
@@ -117,40 +106,7 @@ module tt_um_eemukh_ControlBlock (
   assign Op0 = ALUOp[1] & (F3_0[0] | F3_0[3]);          
 //______________________________________________
 
-  //Sequential design
-
-  // always @(posedge clk) begin
-  //   if (rst_n) begin
-  //     uo_out <= 0;
-  //   end
-
-  //   F6[4] <= 0;
-  //   F6[5] <= 1;
-
-  //   case (Opcode)
-  //     6'b000000 begin
-  //       RegDst <= 1;
-  //       ALUOp[1] <= 1;
-  //       RegWrite <= 1;
-  //     end
-  //     6'b100011 begin
-  //       ALUSrc <= 1;
-  //       MemtoReg <= 1;
-  //       RegWrite <= 1;
-  //       MemRead <= 1;
-  //     end
-  //     6'b101011 begin
-  //       ALUSrc <= 1;
-  //       MemWrite <= 1;
-  //     end
-  //     6'b000100 begin
-  //       Branch <= 1;
-  //       ALUOp[0] <=1;
-  //     end
-  //   endcase
-
-  // end
-
+  
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, 1'b0};
 
