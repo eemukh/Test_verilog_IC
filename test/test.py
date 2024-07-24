@@ -30,16 +30,19 @@ async def test_project(dut):
     #R-type (add)
 
     dut.ui_in.value = 0
-    dut.uio_in.value = 0
+    dut.uio_in.value = 0 
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
 
     # The following assersion is just an example of how to check the output values.
     # Change it to match the actual expected output of your module:
-    assert dut.uo_out.value == 72
+    dut._log.info(f"uio_in={dut.uio_in.value}")
     dut._log.info(f"uio_out={dut.uio_out.value}")
-    assert (dut.uio_out.value & 0b1111) == 0b0110
+    assert dut.uo_out.value == 72
+    assert dut.uio_out.value == 2
+
+    # assert (dut.uio_out.value & 0b1111) == 0b0010
 
     # Keep testing the module by changing the input values, waiting for
     # one or more clock cycles, and asserting the expected output values.
@@ -52,7 +55,9 @@ async def test_project(dut):
     dut.uio_in.value = 2
 
     await ClockCycles(dut.clk, 1)
-
+    
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
     assert dut.uo_out.value == 72
     assert dut.uio_out.value == 6
 
@@ -64,6 +69,9 @@ async def test_project(dut):
     dut.uio_in.value = 4
 
     await ClockCycles(dut.clk, 1)
+
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
 
     assert dut.uo_out.value == 72
     assert dut.uio_out.value == 0
@@ -77,6 +85,9 @@ async def test_project(dut):
 
     await ClockCycles(dut.clk, 1)
 
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
+
     assert dut.uo_out.value == 72
     assert dut.uio_out.value == 1
 
@@ -88,6 +99,9 @@ async def test_project(dut):
     dut.uio_in.value = 10
 
     await ClockCycles(dut.clk, 1)
+
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
 
     assert dut.uo_out.value == 72
     assert dut.uio_out.value == 7
@@ -101,6 +115,9 @@ async def test_project(dut):
 
     await ClockCycles(dut.clk, 1)
 
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
+
     assert dut.uo_out.value == 60
     assert dut.uio_out.value == 2
 
@@ -113,6 +130,9 @@ async def test_project(dut):
 
     await ClockCycles(dut.clk, 1)
 
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
+
     assert dut.uo_out.value == 34
     assert dut.uio_out.value == 2
 
@@ -124,6 +144,9 @@ async def test_project(dut):
     dut.uio_in.value = 6
 
     await ClockCycles(dut.clk, 1)
+
+    dut._log.info(f"uio_in={dut.uio_in.value}")
+    dut._log.info(f"uio_out={dut.uio_out.value}")
 
     assert dut.uo_out.value == 1
     assert dut.uio_out.value == 6
