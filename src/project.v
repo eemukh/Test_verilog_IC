@@ -64,14 +64,30 @@ module tt_um_eemukh_ControlBlock (
   assign uo_out[2] = MemRead;
   assign uo_out[1] = MemWrite;
   assign uo_out[0] = Branch;
-  
+
   assign uo_out[7] = 0;
 
-  assign uio_in[3:0] = F3_0[3:0];
+  assign F3_0[3:0] = uio_in[3:0];
+  
+  assign uio_in[7:4] = 0;
+
+
   assign uio_out[0] = Op0;
   assign uio_out[1] = Op1;
   assign uio_out[2] = Op2;
   assign uio_out[3] = Op3;
+  assign uio_out[7:4] = 0;
+
+  //Assign everything to zero as default
+  // assign RegDst = 0; 
+  // assign ALUSrc = 0;
+  // assign MemtoReg = 0;
+  // assign RegWrite = 0;
+  // assign MemRead = 0;
+  // assign MemWrite = 0;
+  // assign Branch = 0;
+  // assign ALUOp[0] = 0;
+  // assign ALUOp[1] = 0; 
 
   //Main Control Unit
 
@@ -81,7 +97,7 @@ module tt_um_eemukh_ControlBlock (
   assign Out3 = OPcode[0] & OPcode[1] & ~OPcode[2] & OPcode[3] & ~OPcode[4] & OPcode[5];
   assign Out4 = ~OPcode[0] & ~OPcode[1] & OPcode[2] & ~OPcode[3] & ~OPcode[4] & ~OPcode[5];
 
-  assign RegDst = Out1;
+  assign RegDst = Out1; 
   assign ALUSrc = Out2 | Out3;
   assign MemtoReg = Out2;
   assign RegWrite = Out1 | Out2;
@@ -92,13 +108,14 @@ module tt_um_eemukh_ControlBlock (
   assign ALUOp[1] = Out1; 
 
   //ALU Control Unit
-  assign F5_4[1] = 1;
-  assign F5_4[0] = 0;
-
+  // assign F5_4[1] = 1;
+  // assign F5_4[0] = 0;
+//______________________________________________
   assign Op3 = ALUOp[0] & ~ALUOp[0];
   assign Op2 = ALUOp[0] | (ALUOp[1] & F3_0[1]);
   assign Op1 = ~ALUOp[1] | ~F3_0[2];
   assign Op0 = ALUOp[1] & (F3_0[0] | F3_0[3]);          
+//______________________________________________
 
   //Sequential design
 
