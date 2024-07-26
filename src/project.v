@@ -68,7 +68,7 @@ module tt_um_eemukh_ControlBlock (
 
   assign F3_0[3:0] = uio_in[3:0];
 
-  assign uio_in[7:4] = 0;
+  //assign uio_in[7:4] = 0;
 
 
   assign uio_out[0] = Op0;
