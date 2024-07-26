@@ -17,4 +17,4 @@ The project can be used to test certain instructions be R-type instructions (add
 
 ## External hardware
 
-
+Decoder to separate the bits for the code inputs. Registers for writing, reading, inputting MIPS32 instructions. 
